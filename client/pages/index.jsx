@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1.7rem'
     },
     titleMargin: {
-        width: '45%',
+        width: '50%',
         paddingTop: '12%',
         marginLeft: '15%',
         
@@ -62,6 +62,15 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
 
+
+    const connectWallet = () => {
+        let provider = window.ethereum;
+
+        if(typeof provider != 'undefined') {
+            provider.request({ method: 'eth_requestAccounts' })
+        }
+    }
+
     const classes = useStyles();
 
     return (
@@ -85,7 +94,7 @@ const Home = () => {
                     This is a browser game that is built on the Ethereum blockchain on the rinkeby testnet.
                 </Typography>
                 
-                <Button variant="contained" className={classes.landingPageButton}>Connect Wallet</Button>
+                <Button onClick={connectWallet} variant="contained" className={classes.landingPageButton}>Connect Wallet</Button>
 
             </div>
         </div>
