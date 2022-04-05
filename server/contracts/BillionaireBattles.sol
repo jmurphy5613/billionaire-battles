@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
  
@@ -8,13 +8,18 @@ contract BillionaireBattles is ERC721 {
 
     uint listingTransactionFee; //fee taken from each listing
     uint reviveCost;
+    uint numberOfCharacters = 0;
 
     constructor() ERC721("Billionaire Battles", "BBT") {
-        listingTransactionFee = 0.05;
-        reviveCost = 0.05;
+        listingTransactionFee = 5;
+        reviveCost = 5;
+        
     }
 
     struct character {
+        address owner;
+        bool isBeingSold;
+
         //character bio
         string name;
         string description;
@@ -33,13 +38,32 @@ contract BillionaireBattles is ERC721 {
 
     mapping(uint => character) characters;
 
+    character[] characterRoster;
+
+    function mintItemById(uint id) public {
+        //make ids valid
+        require(id >= 0, "Must use valid ID");
+        require(id < characterRoster.length, "ID is too large");
+        
+        numberOfCharacters++;
+        characters[numberOfCharacters] = characterRoster[id];
+
+        _safeMint(msg.sender, characterRoster[id].index);
+    }
+
+
 
     // getters
     function getListingFee() public view returns (uint) {
-        return listingFee;
+        return listingTransactionFee;
     }
 
     function getReviveCost() public view returns (uint) {
         return reviveCost;
     }
+
+    function getCharactersFromAddress() public returns (uint []) {
+        
+    }
+
 }
