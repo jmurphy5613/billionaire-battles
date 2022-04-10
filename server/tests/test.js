@@ -33,7 +33,9 @@ async function main() {
     console.log(await battles.getReviveCost());
     await battles.mintItemById(0);
     await battles.mintItemById(1);
-    await battles.getAllCharacters();
+    const array = await battles.getCharactersFromAddress(battles.address);
+    console.log(array);
+    console.log(array[0].value);
 }
 
 

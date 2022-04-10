@@ -8,7 +8,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 
-import Web3 from 'web3';
 import { ethers } from 'ethers';
 
 import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
@@ -73,13 +72,25 @@ const useStyles = makeStyles(theme => ({
 const Home = () => {
 
     const [connectedWallet, setConnectedWallet] = useState('');
-    const [walletIsConnected, setWalletIsConnected] = useState(false);
+    const [walletIsConnected, setWalletIsConnected] = useState(true);
     const [isNewPlayer, setIsNewPlayer] = useState();
 
 
     useEffect(() => {
-        checkIfNewPlayer();
-    }, [])
+        checkConnection();
+    }, []);
+
+    const checkConnection = async () => {
+        const provider = window.ethereum;
+        provider.request({ method: 'eth_accounts' }).then(async (response) => {
+            if(response.length == 0) {
+                setWalletIsConnected(false);
+            } else {
+                setConnectedWallet(response[0]);
+                setWalletIsConnected(true);
+            }
+        });
+    }
 
 
     const connectWallet = () => {
@@ -87,7 +98,7 @@ const Home = () => {
 
         if(typeof provider != 'undefined') {
             provider.request({ method: 'eth_requestAccounts' }).then(accounts => {
-                setConnectedWallet(true);
+                setConnectedWallet(accounts);
                 setWalletIsConnected(true);
             })
         }
@@ -110,10 +121,10 @@ const Home = () => {
                 const billionaireBattlesContract = new ethers.Contract(BillionaireBattlesAddress, BillionaireBattles.abi, signer);
                 
                 //check if they own any nfts
-                console.log(billionaireBattlesContract.address);
-                await billionaireBattlesContract.getAllCharacters().then(async(result) => {
-                    console.log(result);
-                })
+                const nftCount = await billionaireBattlesContract.getCharactersFromAddress(BillionaireBattlesAddress);
+                if(nftCount.length == 0) {
+                    setIsNewPlayer(true);
+                }
             }
         }
 

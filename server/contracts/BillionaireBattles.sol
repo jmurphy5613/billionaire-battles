@@ -99,12 +99,12 @@ contract BillionaireBattles is ERC721 {
     }
 
     function getCharactersFromAddress(address current) public view returns (uint[] memory) {
-        uint size = 1;
-        uint[] memory ids = new uint[](size);
+        uint currentIndex = 0;
+        uint[] memory ids = new uint[](numberOfCharacters);
         for(uint i = 0; i < numberOfCharacters; i++) {
             if(characters[i].owner == current) {
-                ids[size-1] = i;
-                size++;
+                ids[currentIndex] = i;
+                currentIndex++;
             }
         }
         return ids;
