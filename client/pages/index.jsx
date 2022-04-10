@@ -8,7 +8,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 
-import * as Web3 from 'web3';
+import Web3 from 'web3';
 import { ethers } from 'ethers';
 
 import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
@@ -78,6 +78,7 @@ const Home = () => {
 
 
     useEffect(() => {
+        checkIfNewPlayer();
     }, [])
 
 
@@ -93,21 +94,26 @@ const Home = () => {
         window.ethereum.on('accountsChanged', function(accounts) {
             setWalletIsConnected(true);
             setConnectedWallet(accounts);
-        })
+        });
     }
 
     const checkIfNewPlayer = async() => {
         //check if the connected wallet has and nfts
-        if(connectWallet) {
+
+        if(walletIsConnected) {
             let etherConnection = window.ethereum;
 
-            if(provider) {
+            if(etherConnection) {
                 //set up connection
                 const provider = new ethers.providers.Web3Provider(etherConnection);
                 const signer = provider.getSigner();
                 const billionaireBattlesContract = new ethers.Contract(BillionaireBattlesAddress, BillionaireBattles.abi, signer);
-
-                if()
+                
+                //check if they own any nfts
+                console.log(billionaireBattlesContract.address);
+                await billionaireBattlesContract.getAllCharacters().then(async(result) => {
+                    console.log(result);
+                })
             }
         }
 
@@ -115,7 +121,7 @@ const Home = () => {
 
     const classes = useStyles();
 
-    if(connectWallet) {
+    if(walletIsConnected) {
         return (
             <div className={classes.root}>
 

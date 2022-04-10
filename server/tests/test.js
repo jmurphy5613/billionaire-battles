@@ -32,6 +32,8 @@ async function main() {
     console.log('Deployed Contract to: ', battles.address);
     console.log(await battles.getReviveCost());
     await battles.mintItemById(0);
+    await battles.mintItemById(1);
+    await battles.getAllCharacters();
 }
 
 

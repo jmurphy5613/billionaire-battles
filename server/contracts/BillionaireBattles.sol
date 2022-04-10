@@ -25,6 +25,7 @@ contract BillionaireBattles is ERC721 {
         uint[] memory attack2Damages,
         uint[] memory attack3Damages
     ) ERC721("Billionaire Battles", "BBT") {
+        console.log('hi');
         listingTransactionFee = 5;
         reviveCost = 5;
         for(uint i = 0; i < 2; i++) {
@@ -93,13 +94,20 @@ contract BillionaireBattles is ERC721 {
         return reviveCost;
     }
 
+    function getAllCharacters() public view returns (string memory) {
+        return characters[1].name;
+    }
+
     function getCharactersFromAddress(address current) public view returns (uint[] memory) {
-        uint[] ids;
+        uint size = 1;
+        uint[] memory ids = new uint[](size);
         for(uint i = 0; i < numberOfCharacters; i++) {
             if(characters[i].owner == current) {
-                ids.push(i);
+                ids[size-1] = i;
+                size++;
             }
         }
+        return ids;
     }
 
 }

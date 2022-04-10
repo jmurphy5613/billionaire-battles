@@ -6,6 +6,7 @@ module.exports = {
   networks: {
     rinkeby: {
       url: 'https://eth-rinkeby.alchemyapi.io/v2/xSSDbSxwMY75PTNfOnEaKfYRa5BU2oD8',
+      
     }
   }
 };
