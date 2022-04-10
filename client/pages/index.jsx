@@ -1,9 +1,19 @@
 import Typed from 'react-typed';
 
+//react imports
+import { useEffect, useState } from 'react';
+
 //mui imports
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
+
+import * as Web3 from 'web3';
+import { ethers } from 'ethers';
+
+import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
+import { BillionaireBattlesAddress } from '../helpers/addresses';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -62,16 +72,56 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
 
+    const [connectedWallet, setConnectedWallet] = useState('');
+    const [walletIsConnected, setWalletIsConnected] = useState(false);
+    const [isNewPlayer, setIsNewPlayer] = useState();
+
+
+    useEffect(() => {
+    }, [])
+
 
     const connectWallet = () => {
         let provider = window.ethereum;
 
         if(typeof provider != 'undefined') {
-            provider.request({ method: 'eth_requestAccounts' })
+            provider.request({ method: 'eth_requestAccounts' }).then(accounts => {
+                setConnectedWallet(true);
+                setWalletIsConnected(true);
+            })
         }
+        window.ethereum.on('accountsChanged', function(accounts) {
+            setWalletIsConnected(true);
+            setConnectedWallet(accounts);
+        })
+    }
+
+    const checkIfNewPlayer = async() => {
+        //check if the connected wallet has and nfts
+        if(connectWallet) {
+            let etherConnection = window.ethereum;
+
+            if(provider) {
+                //set up connection
+                const provider = new ethers.providers.Web3Provider(etherConnection);
+                const signer = provider.getSigner();
+                const billionaireBattlesContract = new ethers.Contract(BillionaireBattlesAddress, BillionaireBattles.abi, signer);
+
+                if()
+            }
+        }
+
     }
 
     const classes = useStyles();
+
+    if(connectWallet) {
+        return (
+            <div className={classes.root}>
+
+            </div>
+        )
+    }
 
     return (
         <div className={classes.root}>

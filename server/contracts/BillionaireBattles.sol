@@ -3,6 +3,8 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+
+import "hardhat/console.sol";
  
 contract BillionaireBattles is ERC721 {
 
@@ -10,10 +12,38 @@ contract BillionaireBattles is ERC721 {
     uint reviveCost;
     uint numberOfCharacters = 0;
 
-    constructor() ERC721("Billionaire Battles", "BBT") {
+    constructor(
+        string[] memory names, 
+        string[] memory descriptions, 
+        string[] memory images,
+        uint[] memory healths,
+        uint[] memory maxHealths,
+        string[] memory attack1Names,
+        string[] memory attack2Names,
+        string[] memory attack3Names,
+        uint[] memory attack1Damages,
+        uint[] memory attack2Damages,
+        uint[] memory attack3Damages
+    ) ERC721("Billionaire Battles", "BBT") {
         listingTransactionFee = 5;
         reviveCost = 5;
-        
+        for(uint i = 0; i < 2; i++) {
+            characterRoster.push(character({
+                owner: address(this),
+                isBeingSold: false,
+                name: names[i],
+                description: descriptions[i],
+                image: images[i],
+                health: healths[i],
+                maxHealth: maxHealths[i],
+                attack1Name: attack1Names[i],
+                attack2Name: attack2Names[i],
+                attack3Name: attack3Names[i],
+                attackDamageAttack1: attack1Damages[i],
+                attackDamageAttack2: attack2Damages[i],
+                attackDamageAttack3: attack3Damages[i]
+            }));
+        }
     }
 
     struct character {
@@ -48,9 +78,10 @@ contract BillionaireBattles is ERC721 {
         numberOfCharacters++;
         characters[numberOfCharacters] = characterRoster[id];
 
-        _safeMint(msg.sender, characterRoster[id].index);
-    }
+        _safeMint(msg.sender, numberOfCharacters);
 
+        console.log('Minted to: ', msg.sender);
+    }
 
 
     // getters
@@ -62,16 +93,13 @@ contract BillionaireBattles is ERC721 {
         return reviveCost;
     }
 
-    function getCharactersFromAddress(address current) public view returns (uint []) {
-
-        uint[] temp;
-
+    function getCharactersFromAddress(address current) public view returns (uint[] memory) {
+        uint[] ids;
         for(uint i = 0; i < numberOfCharacters; i++) {
             if(characters[i].owner == current) {
-                temp.push(i);
+                ids.push(i);
             }
         }
-        return temp;
     }
 
 }
