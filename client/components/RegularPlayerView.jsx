@@ -5,6 +5,11 @@ import Button from '@material-ui/core/Button';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
+//tabs imports
+import OwnedBillionaires from './OwnedBillionaires';
+import MarketPlace from './MarketPlace';
+import Fight from './Fight';
+
 import { useState } from "react";
 
 const useStyles = makeStyles(theme => ({
@@ -39,6 +44,9 @@ const RegularPlayerView = () => {
                 <Tab className={classes.tabs} label="Owned Billionaires" />
                 <Tab className={classes.tabs} label="Fight" />
             </Tabs>
+            {value === 0 && <MarketPlace />}
+            {value === 1 && <OwnedBillionaires />}
+            {value === 2 && <Fight />}
         </div>
     )
 }

@@ -16,6 +16,9 @@ import { BillionaireBattlesAddress } from '../helpers/addresses';
 //component imports
 import RegularPlayerView from '../components/RegularPlayerView';
 
+//next imports
+import Router from 'next/router';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -43,8 +46,8 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1.7rem'
     },
     titleMargin: {
-        width: '50%',
-        paddingTop: '12%',
+        width: '60%',
+        paddingTop: '15%',
         marginLeft: '15%',
         
     },
@@ -98,6 +101,11 @@ const Home = () => {
 
 
     const connectWallet = () => {
+
+        if(walletIsConnected) {
+            Router.push('/dashboard');
+        }
+
         let provider = window.ethereum;
 
         if(typeof provider != 'undefined') {
@@ -136,20 +144,6 @@ const Home = () => {
 
     const classes = useStyles();
 
-    if(isNewPlayer) {
-        return (
-            <div className={classes.root}>
-                lol
-            </div>
-        )
-    }
-
-    if(walletIsConnected) {
-        return (
-            <RegularPlayerView />
-        )
-    }
-
     return (
         <div className={classes.root}>
             <div className={classes.titleMargin}>
@@ -157,11 +151,11 @@ const Home = () => {
                     Billionaire Beatdown
                 </Typography>
                 <Typography variant="h2" className={classes.mainTitle}>
-                    {`Fight the richest tech pioneers on a platform built with ` }
+                    {`Fight the richest tech pioneers `}<br/>  {`on a platform built with `}
                     
                     <Typed 
                         className={classes.inerMainTitle}
-                        strings={['Hardhat', 'Ethers', 'Solidity', 'Web3', 'Metamask', 'Truffle']}
+                        strings={['Hardhat', 'Ethers', 'Solidity', 'Open Zeppelin']}
                         loop
                         typeSpeed={60}
                         backSpeed={60}
@@ -171,7 +165,9 @@ const Home = () => {
                     This is a browser game that is built on the Ethereum blockchain on the rinkeby testnet.
                 </Typography>
                 
-                <Button onClick={connectWallet} variant="contained" className={classes.landingPageButton}>Connect Wallet</Button>
+                <Button onClick={connectWallet} variant="contained" className={classes.landingPageButton}>
+                    {walletIsConnected ? 'Play Now' : 'Connect Wallet'}
+                </Button>
 
             </div>
         </div>

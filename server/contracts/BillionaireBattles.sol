@@ -80,8 +80,6 @@ contract BillionaireBattles is ERC721 {
         characters[numberOfCharacters] = characterRoster[id];
 
         _safeMint(msg.sender, numberOfCharacters);
-
-        console.log('Minted to: ', msg.sender);
     }
 
 
