@@ -19,10 +19,20 @@ const OwnedBillionaires = (props) => {
             const signer = provider.getSigner();
             const contract = new ethers.Contract(BillionaireBattlesAddress, BillionaireBattles.abi, signer);
 
-            const ownedBillionaires = await contract.getCharactersFromAddress(
-                etherConnection.request({ method: 'eth_accounts' })[0]
-            );
-            console.log(ownedBillionaires);
+            //get the users wallet
+            const wallet = await etherConnection.request({ method: 'eth_accounts' })
+            console.log(wallet);
+
+            //get the users nfts
+            const nftIndexesHex = await contract.getCharactersFromAddress(wallet[0]);
+            const nftIndexesInt = [];
+            if(nftIndexesHex.length > 0) {
+                for(let i = 0; i < nftIndexesHex.length; i++) {
+                    console.log(parseInt(nftIndexesHex[i], 16));
+                    nftIndexesInt.push(parseInt(nftIndexesHex[i], 16));
+                }
+                
+            }
         }
     }
 

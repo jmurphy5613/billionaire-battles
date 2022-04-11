@@ -16,6 +16,8 @@ async function main() {
     await battles.deployed();
 
     console.log('Deployed Contract to: ', battles.address);
+    await battles.mintItemById(0);
+    await battles.mintItemById(1);
 }
 
 

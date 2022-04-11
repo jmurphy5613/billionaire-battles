@@ -78,6 +78,7 @@ contract BillionaireBattles is ERC721 {
         
         numberOfCharacters++;
         characters[numberOfCharacters] = characterRoster[id];
+        characters[numberOfCharacters].owner = msg.sender;
 
         _safeMint(msg.sender, numberOfCharacters);
     }
