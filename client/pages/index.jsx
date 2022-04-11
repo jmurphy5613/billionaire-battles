@@ -13,6 +13,9 @@ import { ethers } from 'ethers';
 import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
 import { BillionaireBattlesAddress } from '../helpers/addresses';
 
+//component imports
+import RegularPlayerView from '../components/RegularPlayerView';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -78,6 +81,7 @@ const Home = () => {
 
     useEffect(() => {
         checkConnection();
+        checkIfNewPlayer();
     }, []);
 
     const checkConnection = async () => {
@@ -132,11 +136,17 @@ const Home = () => {
 
     const classes = useStyles();
 
-    if(walletIsConnected) {
+    if(isNewPlayer) {
         return (
             <div className={classes.root}>
-
+                lol
             </div>
+        )
+    }
+
+    if(walletIsConnected) {
+        return (
+            <RegularPlayerView />
         )
     }
 
