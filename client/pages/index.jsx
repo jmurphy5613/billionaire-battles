@@ -14,7 +14,7 @@ import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBatt
 import { BillionaireBattlesAddress } from '../helpers/addresses';
 
 //component imports
-import RegularPlayerView from '../components/RegularPlayerView';
+import ConnectedStatus from '../components/ConnectedStatus';
 
 //next imports
 import Router from 'next/router';
@@ -146,6 +146,7 @@ const Home = () => {
 
     return (
         <div className={classes.root}>
+            <ConnectedStatus connected={walletIsConnected} />
             <div className={classes.titleMargin}>
                 <Typography variant="h5" className={classes.smallTitle}>
                     Billionaire Beatdown
