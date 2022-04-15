@@ -7,11 +7,20 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import BillionaireBattles from '../../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
 import { BillionaireBattlesAddress } from '../../helpers/addresses';
 
+//component imports
+import MarketItemGrid from '../nft-grid/MarketItemGrid';
+
 
 const useStyles = makeStyles(theme => ({
     grid: {
         gridTemplateColumns: '1fr 1fr 1fr 1fr',
-        width: '60vw'
+        width: '60vw',
+        display: 'grid'
+    },
+    gridItem: {
+        display: 'flex',
+        height: '100px',
+        flexDirection: 'column'
     }
 }));
 
@@ -66,8 +75,8 @@ const OwnedBillionaires = (props) => {
 
 
     return (
-        <div>
-
+        <div className={classes.grid}>
+            <MarketItemGrid gridItems={ownedBillionaires} />
         </div>
     )
 }

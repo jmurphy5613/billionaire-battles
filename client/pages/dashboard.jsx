@@ -1,4 +1,4 @@
-import RegularPlayerView from '../components/RegularPlayerView';
+import RegularPlayerView from '../components/page/RegularPlayerView';
 
 
 const Dashboard = () => {

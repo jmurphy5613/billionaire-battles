@@ -5,6 +5,9 @@ const theme = createTheme({
         primary: {
             main: '#282c44',
         },
+        secondary: {
+            contrast: '#0d1944'
+        }
     },
     typography: {
         fontFamily: {
@@ -15,7 +18,7 @@ const theme = createTheme({
     },
     breakpoints: {
         values: {
-            
+
         }
     }
 });
