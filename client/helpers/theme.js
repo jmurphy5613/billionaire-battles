@@ -12,6 +12,11 @@ const theme = createTheme({
             secondary: 'Poppins, sans-serif',
             tertiary: 'Noto Sans, sans-serif'
         }
+    },
+    breakpoints: {
+        values: {
+            
+        }
     }
 });
 

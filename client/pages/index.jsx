@@ -46,7 +46,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: '1.7rem'
     },
     titleMargin: {
-        width: '60%',
         paddingTop: '15%',
         marginLeft: '15%',
         
@@ -78,18 +77,15 @@ const useStyles = makeStyles(theme => ({
 const Home = () => {
 
     const [connectedWallet, setConnectedWallet] = useState('');
-    const [walletIsConnected, setWalletIsConnected] = useState(true);
-    const [isNewPlayer, setIsNewPlayer] = useState();
+    const [walletIsConnected, setWalletIsConnected] = useState(false);
 
-
-    useEffect(() => {
-        checkConnection();
-        checkIfNewPlayer();
+    useEffect(async () => {
+        await checkConnection();
     }, []);
 
     const checkConnection = async () => {
         const provider = window.ethereum;
-        provider.request({ method: 'eth_accounts' }).then(async (response) => {
+        await provider.request({ method: 'eth_accounts' }).then(async (response) => {
             if(response.length == 0) {
                 setWalletIsConnected(false);
             } else {
@@ -100,7 +96,7 @@ const Home = () => {
     }
 
 
-    const connectWallet = () => {
+    const connectWallet = async () => {
 
         if(walletIsConnected) {
             Router.push('/dashboard');
@@ -109,7 +105,7 @@ const Home = () => {
         let provider = window.ethereum;
 
         if(typeof provider != 'undefined') {
-            provider.request({ method: 'eth_requestAccounts' }).then(accounts => {
+            await provider.request({ method: 'eth_requestAccounts' }).then(accounts => {
                 setConnectedWallet(accounts);
                 setWalletIsConnected(true);
             })
@@ -118,28 +114,6 @@ const Home = () => {
             setWalletIsConnected(true);
             setConnectedWallet(accounts);
         });
-    }
-
-    const checkIfNewPlayer = async() => {
-        //check if the connected wallet has and nfts
-
-        if(walletIsConnected) {
-            let etherConnection = window.ethereum;
-
-            if(etherConnection) {
-                //set up connection
-                const provider = new ethers.providers.Web3Provider(etherConnection);
-                const signer = provider.getSigner();
-                const billionaireBattlesContract = new ethers.Contract(BillionaireBattlesAddress, BillionaireBattles.abi, signer);
-                
-                //check if they own any nfts
-                const nftCount = await billionaireBattlesContract.getCharactersFromAddress(BillionaireBattlesAddress);
-                if(nftCount.length == 0) {
-                    setIsNewPlayer(true);
-                }
-            }
-        }
-
     }
 
     const classes = useStyles();
