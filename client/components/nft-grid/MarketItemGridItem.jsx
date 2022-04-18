@@ -24,7 +24,15 @@ const useStyles = makeStyles(theme => ({
     },
     bioFrame: {
         height: '20%',
-        wdith: '100%'
+        width: '100%',
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    nftName: {
+        fontSize: '1rem',
+        fontFamily: 'Ubuntu'
     }
 }))
 
@@ -46,7 +54,9 @@ const MarketItemGridItem = (props) => {
                 }}
             />
             <div className={classes.bioFrame}>
-                
+                <Typography variant="h4" className={classes.nftName}>
+                    {props.name}
+                </Typography>
             </div>
         </div>
     )
