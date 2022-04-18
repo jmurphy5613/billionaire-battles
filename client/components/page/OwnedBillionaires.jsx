@@ -12,16 +12,11 @@ import MarketItemGrid from '../nft-grid/MarketItemGrid';
 
 
 const useStyles = makeStyles(theme => ({
-    grid: {
-        gridTemplateColumns: '1fr 1fr 1fr 1fr',
-        width: '60vw',
-        display: 'grid'
-    },
-    gridItem: {
+    root: {
+        width: '100vw',
         display: 'flex',
-        height: '100px',
-        flexDirection: 'column'
-    }
+        justifyContent: 'center'
+    },
 }));
 
 
@@ -75,8 +70,9 @@ const OwnedBillionaires = (props) => {
 
 
     return (
-        <div className={classes.grid}>
-            <MarketItemGrid gridItems={ownedBillionaires} />
+
+        <div className={classes.root}>
+            <MarketItemGrid gridItems={ownedBillionaires} paddingTop={2} />
         </div>
     )
 }

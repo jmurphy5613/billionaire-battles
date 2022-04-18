@@ -7,6 +7,7 @@ const useStyles = makeStyles(theme => ({
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr',
         width: '65vw',
+        gridGap: '1.5rem'
     }
 }))
 
@@ -19,7 +20,9 @@ const MarketItemGrid = (props) => {
     const classes = useStyles();
 
     return (
-        <div className={classes.grid}>
+        <div className={classes.grid} style={{
+            marginTop: `${props.paddingTop}rem`
+        }}>
             {props.gridItems.map(element => {
                 return (
                     <MarketItemGridItem  name={element.name} img={element.img} />

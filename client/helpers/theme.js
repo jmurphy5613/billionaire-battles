@@ -6,14 +6,15 @@ const theme = createTheme({
             main: '#282c44',
         },
         secondary: {
-            contrast: '#0d1944'
+            main: '#0d1944'
         }
     },
     typography: {
         fontFamily: {
             primary: '"Inter", sans-serif',
             secondary: 'Poppins, sans-serif',
-            tertiary: 'Noto Sans, sans-serif'
+            tertiary: 'Noto Sans, sans-serif',
+            
         }
     },
     breakpoints: {
