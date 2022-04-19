@@ -10,6 +10,9 @@ import { BillionaireBattlesAddress } from '../../helpers/addresses';
 //component imports
 import MarketItemGrid from '../nft-grid/MarketItemGrid';
 
+//helper functions
+import { putNftIntoCorrectObjectFormat } from '../../helpers/format';
+
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,24 +23,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const OwnedBillionaires = (props) => {
+const OwnedBillionaires = () => {
 
     const classes = useStyles();
 
-    const [ownedBillionaires, setOwnedBillionaires] = useState([
-        {
-            img: 'https://i.imgur.com/kgFwxcX.jpg',
-            name: 'Nikil Viswanathan',
-            health: 100,
-            maxHealth: 125
-        },
-        {
-            img: 'https://i.imgur.com/Zmh5ZFQ.jpg',
-            name: 'Adam Neumann',
-            health: 75,
-            maxHealth: 100
-        }
-    ]);
+    const [ownedBillionaires, setOwnedBillionaires] = useState([]);
+    const [dataFetched, setDataFetched] = useState(false);
 
 
     const getOwnedBillionaires = async () => {
@@ -64,23 +55,41 @@ const OwnedBillionaires = (props) => {
                     
                 }
                 console.log(nftIndexesInt);
+
                 //get the metadata from the nfts owned
                 const characterMetaData = [];
-
                 for(let i = 0; i < nftIndexesInt.length; i++) {
-                    const currentData = await contract.getCharacterDisplayDataById(nftIndexesInt[i]+1);
+                    const currentData = await contract.getCharacterDisplayDataById(nftIndexesInt[i]);
                     characterMetaData.push(currentData);
                 }
                 console.log(characterMetaData);
 
+                //get the health from the characters
+                const characterHealth = [];
+                for(let i = 0; i < nftIndexesInt.length; i++) {
+                    const currentHealthHex = await contract.getCharacterHealthAndMaxHealthById(nftIndexesInt[i]);
+                    const currentHealthInt = [];
+                    for(let j = 0; j < 2; j++) {
+                        currentHealthInt.push(parseInt(currentHealthHex[j], 10));
+                    }
+                    characterHealth.push(currentHealthInt);
+                }
+                console.log(characterHealth);
+
+                //get everything in propper object format
+                for(let i = 0; i < nftIndexesInt.length; i++) {
+                    const objectFormat = putNftIntoCorrectObjectFormat(characterMetaData[i][1], characterMetaData[i][0], characterHealth[i][0], characterHealth[i][1] );
+                    ownedBillionaires.push(objectFormat);
+                }
             }
 
         }
     }
 
 
-    useEffect(() => {
-        getOwnedBillionaires();
+    useEffect(async () => {
+        await getOwnedBillionaires();
+        await setDataFetched(true);
     }, []);
 
 
@@ -88,6 +97,8 @@ const OwnedBillionaires = (props) => {
 
         <div className={classes.root}>
             <MarketItemGrid gridItems={ownedBillionaires} paddingTop={2} />
+            {console.log(ownedBillionaires)}
+
         </div>
     )
 }

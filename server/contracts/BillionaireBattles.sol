@@ -100,7 +100,7 @@ contract BillionaireBattles is ERC721 {
     function getCharactersFromAddress(address current) public view returns (uint[] memory) {
         uint currentIndex = 0;
         uint[] memory ids = new uint[](numberOfCharacters);
-        for(uint i = 0; i < numberOfCharacters; i++) {
+        for(uint i = 1; i <= numberOfCharacters; i++) {
             if(characters[i].owner == current) {
                 ids[currentIndex] = i;
                 currentIndex++;
@@ -119,6 +119,18 @@ contract BillionaireBattles is ERC721 {
         string memory name = characters[index].name;
         data[0] = img;
         data[1] = name;
+        return data;
+    }
+
+    function getCharacterHealthAndMaxHealthById(uint index) public view returns (uint[] memory) {
+        /*
+        This function is called to get the health of a character
+        */
+        uint[] memory data = new uint[](2);
+        uint health = characters[index].health;
+        uint maxHealth = characters[index].maxHealth;
+        data[0] = health;
+        data[1] = maxHealth;
         return data;
     }
 
