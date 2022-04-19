@@ -9,6 +9,7 @@ import Tab from '@material-ui/core/Tab';
 import OwnedBillionaires from './OwnedBillionaires';
 import MarketPlace from './MarketPlace';
 import Fight from './Fight';
+import Store from './Store';
 
 import { useState } from "react";
 
@@ -43,10 +44,12 @@ const RegularPlayerView = () => {
                 <Tab className={classes.tabs} label="Market Place" />
                 <Tab className={classes.tabs} label="Owned Billionaires" />
                 <Tab className={classes.tabs} label="Fight" />
+                <Tab className={classes.tabs} label="Store" />
             </Tabs>
             {value === 0 && <MarketPlace />}
             {value === 1 && <OwnedBillionaires />}
             {value === 2 && <Fight />}
+            {value === 3 && <Store />}
         </div>
     )
 }

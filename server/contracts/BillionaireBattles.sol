@@ -109,14 +109,14 @@ contract BillionaireBattles is ERC721 {
         return ids;
     }
 
-    function getCharacterDisplayDataById(uint id) public view returns (string[] memory) {
+    function getCharacterDisplayDataById(uint index) public view returns (string[] memory) {
         /*
         This function is called for the grid displays, it does not give the client
         data that is used in the logic of fighting etc 
         */
         string[] memory data = new string[](2);
-        string img = character[id].image;
-        string name = character[id].name;
+        string memory img = characters[index].image;
+        string memory name = characters[index].name;
         data[0] = img;
         data[1] = name;
         return data;
