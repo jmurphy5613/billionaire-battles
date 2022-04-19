@@ -55,15 +55,26 @@ const OwnedBillionaires = (props) => {
             //get the users nfts
             const nftIndexesHex = await contract.getCharactersFromAddress(wallet[0]);
             if(nftIndexesHex) {
+                //get the indexes of the nfts that are owned
                 const nftIndexesInt = [];
                 if(nftIndexesHex.length > 0) {
                     for(let i = 0; i < nftIndexesHex.length; i++) {
-                        console.log(parseInt(nftIndexesHex[i], 16));
                         nftIndexesInt.push(parseInt(nftIndexesHex[i], 16));
                     }
                     
                 }
+                console.log(nftIndexesInt);
+                //get the metadata from the nfts owned
+                const characterMetaData = [];
+
+                for(let i = 0; i < nftIndexesInt.length; i++) {
+                    const currentData = await contract.getCharacterDisplayDataById(nftIndexesInt[i]+1);
+                    characterMetaData.push(currentData);
+                }
+                console.log(characterMetaData);
+
             }
+
         }
     }
 
