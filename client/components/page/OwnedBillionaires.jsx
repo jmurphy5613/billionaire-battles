@@ -82,14 +82,13 @@ const OwnedBillionaires = () => {
                     ownedBillionaires.push(objectFormat);
                 }
             }
-
+            setDataFetched(true);
         }
     }
 
 
     useEffect(async () => {
         await getOwnedBillionaires();
-        await setDataFetched(true);
     }, []);
 
 

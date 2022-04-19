@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         alignItems: 'center'
     },
     healthCounterTitle: {
-        fontSize: '0.8rem', 
+        fontSize: '0.9rem', 
         fontWeight: '600'
     }
 }));
