@@ -7,7 +7,7 @@ const useStyles = makeStyles(theme => ({
         display: 'grid',
         gridTemplateColumns: '1fr 1fr 1fr 1fr',
         width: '65vw',
-        gridGap: '1.5rem'
+        gridGap: '3rem'
     }
 }))
 

@@ -8,11 +8,6 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import Button from '@material-ui/core/Button';
 
-import { ethers } from 'ethers';
-
-import BillionaireBattles from '../../server/artifacts/contracts/BillionaireBattles.sol/BillionaireBattles.json';
-import { BillionaireBattlesAddress } from '../helpers/addresses';
-
 //component imports
 import ConnectedStatus from '../components/ConnectedStatus';
 

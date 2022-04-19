@@ -2,13 +2,14 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 
+import HealthOnItem from '../HealthOnItem';
+
 const useStyles = makeStyles(theme => ({
     gridItem: {
         height: '30vh',
-        display: 'flex',
+        display: 'inline-flex',
         flexDirection: 'column',
         backgroundColor: theme.palette.secondary.main,
-        padding: '1px',
         borderRadius: '5px',
         border: '1px solid #3750A8',
         transition: '0.5s',
@@ -21,6 +22,9 @@ const useStyles = makeStyles(theme => ({
         width: '100%',
         backgroundSize: 'cover',
         backgroundRepeat: 'none',
+        borderTopLeftRadius: '5px',
+        borderTopRightRadius: '5px',
+
     },
     bioFrame: {
         height: '20%',
@@ -52,7 +56,11 @@ const MarketItemGridItem = (props) => {
                 style={{
                     backgroundImage: `url(${props.img})`
                 }}
-            />
+                
+            >
+            <HealthOnItem health={50} />
+            </div>
+
             <div className={classes.bioFrame}>
                 <Typography variant="h4" className={classes.nftName}>
                     {props.name}
