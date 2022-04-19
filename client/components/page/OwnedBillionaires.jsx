@@ -27,11 +27,15 @@ const OwnedBillionaires = (props) => {
     const [ownedBillionaires, setOwnedBillionaires] = useState([
         {
             img: 'https://i.imgur.com/kgFwxcX.jpg',
-            name: 'Nikil Viswanathan'
+            name: 'Nikil Viswanathan',
+            health: 100,
+            maxHealth: 125
         },
         {
             img: 'https://i.imgur.com/Zmh5ZFQ.jpg',
-            name: 'Adam Neumann'
+            name: 'Adam Neumann',
+            health: 75,
+            maxHealth: 100
         }
     ]);
 

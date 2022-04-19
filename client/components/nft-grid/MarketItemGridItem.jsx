@@ -58,7 +58,7 @@ const MarketItemGridItem = (props) => {
                 }}
                 
             >
-            <HealthOnItem health={50} />
+            <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
             </div>
 
             <div className={classes.bioFrame}>

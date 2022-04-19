@@ -25,7 +25,7 @@ const MarketItemGrid = (props) => {
         }}>
             {props.gridItems.map(element => {
                 return (
-                    <MarketItemGridItem  name={element.name} img={element.img} />
+                    <MarketItemGridItem  name={element.name} img={element.img} health={element.health} maxHealth={element.maxHealth} />
                 )
             })}
         </div>

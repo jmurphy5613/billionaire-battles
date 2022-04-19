@@ -28,7 +28,7 @@ const HealthOnItem = (props) => {
     return (
         <div className={classes.healthCounter}>
             <Typography variant="h5" className={classes.healthCounterTitle}>
-                {`${props.health}/100`}
+                {`${props.health}/${props.maxHealth}`}
             </Typography>
         </div>
     )
