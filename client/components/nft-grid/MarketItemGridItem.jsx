@@ -33,9 +33,6 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'none',
         borderTopLeftRadius: '5px',
         borderTopRightRadius: '5px',
-        '&:hover': {
-            
-        }
     },
     bioFrame: {
         height: '20%',
@@ -58,22 +55,26 @@ const MarketItemGridItem = (props) => {
     const [isBeingHovered, setIsBeingHovered] = useState(false);
 
     /* 
-    Organization of the grid item:
+    Organization of the grid item:x
     1. picture
     2. name  with health
     3. if the health is 0, offer a heal option
     */
+
     return (
-        <div className={classes.gridItem}>
+        <>
+        {isBeingHovered === true && <SeeStats />}
+        <div className={classes.gridItem}
+            onMouseEnter={() => {
+                setIsBeingHovered(true);
+            }}
+            onMouseLeave={() => {
+                setIsBeingHovered(false);
+        }}
+        >
             <div className={classes.pictureFrame} 
                 style={{
                     backgroundImage: `url(${props.img})`,
-                }}
-                onMouseEnter={() => {
-                    setIsBeingHovered(true);
-                }}
-                onMouseLeave={() => {
-                    setIsBeingHovered(false);
                 }}
             >
             <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
@@ -84,8 +85,9 @@ const MarketItemGridItem = (props) => {
                     {props.name}
                 </Typography>
             </div>
-            {isBeingHovered === true && <SeeStats />}
+            
         </div>
+        </>
     )
 }
 
