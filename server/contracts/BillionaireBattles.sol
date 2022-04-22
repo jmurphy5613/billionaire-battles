@@ -133,5 +133,9 @@ contract BillionaireBattles is ERC721 {
         data[1] = maxHealth;
         return data;
     }
+    
+    function getMarketItems() public view returns (uint[] memory) {
+
+    }
 
 }

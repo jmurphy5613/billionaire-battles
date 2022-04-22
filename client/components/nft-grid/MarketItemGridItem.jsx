@@ -2,7 +2,13 @@
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Typography from '@material-ui/core/Typography';
 
+//react imports
+import { useState } from 'react';
+
+//custom component imports
 import HealthOnItem from '../HealthOnItem';
+import SeeStats from '../SeeStats';
+
 
 const useStyles = makeStyles(theme => ({
     gridItem: {
@@ -14,7 +20,10 @@ const useStyles = makeStyles(theme => ({
         border: '1px solid #3750A8',
         transition: '0.5s',
         '&:hover': {
-            transform: 'scale(1.1)'
+            transform: 'scale(1.1)',
+            cursor: 'pointer',
+            webkitFilter: 'blur(2px)', /* Chrome, Safari, Opera */
+            filter: 'blur(2px)',
         }
     },
     pictureFrame: {
@@ -24,7 +33,9 @@ const useStyles = makeStyles(theme => ({
         backgroundRepeat: 'none',
         borderTopLeftRadius: '5px',
         borderTopRightRadius: '5px',
-
+        '&:hover': {
+            
+        }
     },
     bioFrame: {
         height: '20%',
@@ -44,6 +55,8 @@ const MarketItemGridItem = (props) => {
 
     const classes = useStyles();
 
+    const [isBeingHovered, setIsBeingHovered] = useState(false);
+
     /* 
     Organization of the grid item:
     1. picture
@@ -54,9 +67,14 @@ const MarketItemGridItem = (props) => {
         <div className={classes.gridItem}>
             <div className={classes.pictureFrame} 
                 style={{
-                    backgroundImage: `url(${props.img})`
+                    backgroundImage: `url(${props.img})`,
                 }}
-                
+                onMouseEnter={() => {
+                    setIsBeingHovered(true);
+                }}
+                onMouseLeave={() => {
+                    setIsBeingHovered(false);
+                }}
             >
             <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
             </div>
@@ -66,6 +84,7 @@ const MarketItemGridItem = (props) => {
                     {props.name}
                 </Typography>
             </div>
+            {isBeingHovered === true && <SeeStats />}
         </div>
     )
 }
