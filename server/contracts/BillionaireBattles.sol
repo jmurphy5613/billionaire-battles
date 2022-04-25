@@ -135,7 +135,15 @@ contract BillionaireBattles is ERC721 {
     }
     
     function getMarketItems() public view returns (uint[] memory) {
-
+        uint currentId = 0;
+        uint[] memory ids = new uint[](numberOfCharacters);
+        for(uint i = 0; i < numberOfCharacters; i++) {
+            if(characters[i].isBeingSold == true) {
+                ids[currentId] = i;
+                currentId++;
+            }
+        }
+        return ids;
     }
 
 }

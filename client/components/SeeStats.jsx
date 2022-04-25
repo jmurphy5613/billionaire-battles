@@ -4,12 +4,11 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles(theme => ({
     seeStatsButton: {
-        position: 'relative',
-        zIndex: '999',
-        left: '20%',
-        top: '20%',
+        position: 'absolute',
         color: '#c9163a',
-        borderColor: '#c9163a'
+        borderColor: '#c9163a',
+        zIndex: '999',
+        margin: 'auto'
     }
 }))
 

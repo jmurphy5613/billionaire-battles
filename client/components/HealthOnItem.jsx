@@ -3,11 +3,11 @@ import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles(theme => ({
     healthCounter: {
-        position: 'relative',
+        position: 'absolute',
         height: '1.3rem',
         width: '8rem',
-        left: '45%',
-        bottom: '0.5rem',
+        // left: '0',
+        // bottom: '0',
         fontFamily: 'Ubuntu',
         backgroundColor: '#17EF97',
         borderRadius: '5px',
@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
         height: '1.3rem',
         width: '8rem',
         left: '45%',
-        bottom: '0.5rem',
+        bottom: '1rem',
         fontFamily: 'Ubuntu',
         backgroundColor: '#c9163a',
         borderRadius: '5px',
