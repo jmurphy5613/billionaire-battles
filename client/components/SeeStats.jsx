@@ -8,7 +8,11 @@ const useStyles = makeStyles(theme => ({
         color: '#c9163a',
         borderColor: '#c9163a',
         zIndex: '999',
-        margin: 'auto'
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '70%'
+
     }
 }))
 

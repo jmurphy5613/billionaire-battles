@@ -18,12 +18,7 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.secondary.main,
         borderRadius: '5px',
         border: '1px solid #3750A8',
-        transition: '0.5s',
-        '&:hover': {
-            cursor: 'pointer',
-            webkitFilter: 'blur(2px)', /* Chrome, Safari, Opera */
-            filter: 'blur(2px)',
-        }
+        position: 'relative',
     },
     pictureFrame: {
         height: '80%',
@@ -44,6 +39,17 @@ const useStyles = makeStyles(theme => ({
     nftName: {
         fontSize: '1rem',
         fontFamily: 'Ubuntu'
+    },
+    hoverEffect: {
+        position: 'absolute',
+        transition: '0.5s',
+        '&:hover': {
+            cursor: 'pointer',
+            backdropFilter: 'blur(2px)', /* Chrome, Safari, Opera */
+            filter: 'blur(2px)',
+        },
+        height: '100%',
+        width: '100%'
     }
 }))
 
@@ -51,7 +57,7 @@ const MarketItemGridItem = (props) => {
 
     const classes = useStyles();
 
-    const [isBeingHovered, setIsBeingHovered] = useState(true);
+    const [isBeingHovered, setIsBeingHovered] = useState(false);
 
     /* 
     Organization of the grid item:x
@@ -62,14 +68,20 @@ const MarketItemGridItem = (props) => {
 
     return (
         <>
-        <div className={classes.gridItem}>
+        <div className={classes.gridItem}
+            onMouseEnter={() => setIsBeingHovered(true)}
+            onMouseLeave={() => setIsBeingHovered(false)}
+        >
+            <div className={classes.hoverEffect}>
+                <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
+            </div>
+            
             <div className={classes.pictureFrame} 
                 style={{
                     backgroundImage: `url(${props.img})`,
                 }}
             >
-            <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
-            <SeeStats />
+            { isBeingHovered && <SeeStats />  }
 
             </div>
 
