@@ -1,5 +1,5 @@
-import RegularPlayerView from '../components/page/RegularPlayerView';
-import HomeButton from '../components/HomeButton';
+import RegularPlayerView from '../../components/page/RegularPlayerView';
+import HomeButton from '../../components/HomeButton';
 
 
 const Dashboard = () => {

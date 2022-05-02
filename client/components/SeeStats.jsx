@@ -1,6 +1,8 @@
 import Button from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
+import { useRouter } from 'next/router';
+
 
 const useStyles = makeStyles(theme => ({
     seeStatsButton: {
@@ -16,14 +18,17 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const SeeStats = () => {
+const SeeStats = (props) => {
 
     const classes = useStyles();
+    const router = useRouter();
 
     return (
-        <Button variant="outlined" className={classes.seeStatsButton}>
-            See Profile
-        </Button>
+        <a target="_blank" href={`/dashboard/${props.id}`}>
+            <Button variant="outlined" className={classes.seeStatsButton}>
+                See Profile
+            </Button>
+        </a>
     )
 }
 

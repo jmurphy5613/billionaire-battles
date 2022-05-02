@@ -72,7 +72,8 @@ const MarketItemGridItem = (props) => {
             onMouseEnter={() => setIsBeingHovered(true)}
             onMouseLeave={() => setIsBeingHovered(false)}
         >
-            <div className={classes.hoverEffect}>
+            <div className={classes.hoverEffect}
+            >
                 <HealthOnItem health={props.health} maxHealth={props.maxHealth} />
             </div>
             
@@ -81,7 +82,7 @@ const MarketItemGridItem = (props) => {
                     backgroundImage: `url(${props.img})`,
                 }}
             >
-            { isBeingHovered && <SeeStats />  }
+            { isBeingHovered && <SeeStats id={props.id} />  }
 
             </div>
 

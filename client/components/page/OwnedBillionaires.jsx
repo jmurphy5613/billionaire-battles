@@ -78,7 +78,7 @@ const OwnedBillionaires = () => {
 
                 //get everything in propper object format
                 for(let i = 0; i < nftIndexesInt.length; i++) {
-                    const objectFormat = putNftIntoCorrectObjectFormat(characterMetaData[i][1], characterMetaData[i][0], characterHealth[i][0], characterHealth[i][1] );
+                    const objectFormat = putNftIntoCorrectObjectFormat(nftIndexesInt[i], characterMetaData[i][1], characterMetaData[i][0], characterHealth[i][0], characterHealth[i][1] );
                     ownedBillionaires.push(objectFormat);
                 }
             }

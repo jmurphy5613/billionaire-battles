@@ -1,5 +1,6 @@
-export const putNftIntoCorrectObjectFormat = (name, imgLink, health, maxHealth) => {
+export const putNftIntoCorrectObjectFormat = (id, name, imgLink, health, maxHealth) => {
     let current = {
+        id: id,
         img: `${imgLink}`,
         name: `${name}`,
         health: health,

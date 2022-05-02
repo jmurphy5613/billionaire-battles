@@ -24,8 +24,9 @@ const MarketItemGrid = (props) => {
             marginTop: `${props.paddingTop}rem`
         }}>
             {props.gridItems.map(element => {
+                {console.log(element.id)}
                 return (
-                    <MarketItemGridItem  name={element.name} img={element.img} health={element.health} maxHealth={element.maxHealth} />
+                    <MarketItemGridItem id={element.id} name={element.name} img={element.img} health={element.health} maxHealth={element.maxHealth} />
                 )
             })}
         </div>
