@@ -47,9 +47,11 @@ const useStyles = makeStyles(theme => ({
             cursor: 'pointer',
             backdropFilter: 'blur(2px)', /* Chrome, Safari, Opera */
             filter: 'blur(2px)',
+            
         },
         height: '100%',
-        width: '100%'
+        width: '100%',
+
     }
 }))
 
